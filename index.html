@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jeeradate (jk.dev) — Full-Stack Python Developer &amp; Automation Engineer</title>
+  <meta name="description" content="รับพัฒนา Web Application, Internal Tools และ Windows Automation ด้วย Python, NiceGUI และ SQLModel — จากประสบการณ์ระบบโรงงานและ ERP สู่ระบบที่ใช้งานได้จริง">
+  <meta name="author" content="Jeeradate (jk.dev)">
+  <meta name="keywords" content="Python, NiceGUI, SQLModel, FastAPI, PostgreSQL, SQLite, PowerShell, AutoHotkey, Automation, Web Application, รับทำเว็บแอป, นักพัฒนา Python">
+  <meta name="theme-color" content="#060a13">
+  <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="https://jeeradate.github.io/">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jeeradate.github.io/">
+  <meta property="og:title" content="Jeeradate (jk.dev) — Web Apps &amp; Workflow Automation">
+  <meta property="og:description" content="Full-Stack Python Developer สายปฏิบัติ — สร้าง Internal Tools, ระบบคิว/ออเดอร์ และ Windows Automation ที่ลดเวลาและ human error">
+  <meta property="og:locale" content="th_TH">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Jeeradate (jk.dev) — Web Apps &amp; Workflow Automation">
+  <meta name="twitter:description" content="รับพัฒนา Web Application และ Automation ด้วย Python — ประสบการณ์จริงจากระบบโรงงานและ ERP">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    // Set theme before first paint (dark by default, remembers explicit choice).
+    (function () {
+      try {
+        var saved = localStorage.getItem('jk-theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch (e) { /* storage blocked — keep dark default */ }
+      document.documentElement.classList.add('js');
+    }());
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: 'var(--bg)',
+            base2: 'var(--bg-2)',
+            card: 'var(--card)',
+            line: 'var(--border)',
+            ink: 'var(--text)',
+            heading: 'var(--heading)',
+            muted: 'var(--muted)',
+            accent: 'var(--accent)',
+            accent2: 'var(--accent-2)'
+          },
+          fontFamily: {
+            sans: ['Inter', 'Prompt', 'Noto Sans Thai', 'system-ui', 'sans-serif'],
+            thai: ['Prompt', 'Noto Sans Thai', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jeeradate",
+    "alternateName": "jk.dev",
+    "url": "https://jeeradate.github.io/",
+    "jobTitle": "Full-Stack Python Developer & Automation Engineer",
+    "description": "Industrial and systems engineer turned full-stack Python developer, building internal web apps, dashboards, and Windows workflow automation.",
+    "sameAs": [
+      "https://github.com/jeeradate",
+      "https://fastwork.com/user/jk.dev"
+    ],
+    "knowsAbout": ["Python", "NiceGUI", "SQLModel", "FastAPI", "SQLAlchemy", "SQLite", "PostgreSQL", "PowerShell", "AutoHotkey", "Workflow Automation"]
+  }
+  </script>
+
+  <style>
+    /* ============================================================
+       Design tokens — edit these to re-brand the whole site.
+       ============================================================ */
+    :root,
+    [data-theme="dark"] {
+      --bg: #060a13;
+      --bg-2: #0a1020;
+      --card: rgba(15, 23, 42, 0.62);
+      --card-solid: #0c1424;
+      --border: rgba(148, 163, 184, 0.14);
+      --border-strong: rgba(148, 163, 184, 0.26);
+      --text: #cbd5e1;
+      --heading: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #818cf8;
+      --accent-2: #2dd4bf;
+      --glow: rgba(99, 102, 241, 0.22);
+      --glow-2: rgba(45, 212, 191, 0.10);
+      --grid: rgba(148, 163, 184, 0.07);
+      --chip: rgba(148, 163, 184, 0.07);
+      --shadow: 0 24px 80px -32px rgba(0, 0, 0, 0.8);
+      --nav: rgba(6, 10, 19, 0.78);
+      --menu: rgba(7, 12, 22, 0.985);
+      color-scheme: dark;
+    }
+
+    [data-theme="light"] {
+      --bg: #f7f9fc;
+      --bg-2: #eef2f9;
+      --card: rgba(255, 255, 255, 0.84);
+      --card-solid: #ffffff;
+      --border: rgba(15, 23, 42, 0.10);
+      --border-strong: rgba(15, 23, 42, 0.18);
+      --text: #364152;
+      --heading: #0b1220;
+      --muted: #5b6b82;
+      --accent: #4f46e5;
+      --accent-2: #0f766e;
+      --glow: rgba(79, 70, 229, 0.14);
+      --glow-2: rgba(15, 118, 110, 0.08);
+      --grid: rgba(15, 23, 42, 0.06);
+      --chip: rgba(15, 23, 42, 0.045);
+      --shadow: 0 24px 60px -34px rgba(15, 23, 42, 0.35);
+      --nav: rgba(247, 249, 252, 0.82);
+      --menu: rgba(255, 255, 255, 0.99);
+      color-scheme: light;
+    }
+
+    * { -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Prompt', 'Noto Sans Thai', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+    ::selection { background: rgba(129, 140, 248, 0.35); color: var(--heading); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+    section[id] { scroll-margin-top: 92px; }
+
+    /* Fixed ambient background */
+    .site-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(55rem 34rem at 84% -8%, var(--glow), transparent 65%),
+        radial-gradient(40rem 26rem at 2% 4%, var(--glow-2), transparent 68%);
+    }
+    .page-shell { position: relative; z-index: 10; }
+
+    .container-x {
+      width: 100%;
+      max-width: 76rem;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+    @media (min-width: 640px) { .container-x { padding-inline: 2rem; } }
+
+    .section { padding-block: 4.75rem; }
+    @media (min-width: 640px) { .section { padding-block: 6rem; } }
+    .band { background: var(--bg-2); border-block: 1px solid var(--border); }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .site-header.scrolled {
+      background: var(--nav);
+      border-bottom-color: var(--border);
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+    }
+    .scroll-progress {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 60;
+      height: 2px;
+      background: transparent;
+      pointer-events: none;
+    }
+    .scroll-progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex: none;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.06em;
+      color: #fff;
+      background: linear-gradient(135deg, #6366f1, #7c3aed 55%, #0d9488);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 24px -10px rgba(99, 102, 241, 0.8);
+    }
+    .nav-link {
+      position: relative;
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 0.55rem 0.1rem;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 1px;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-link:hover,
+    .nav-link.is-active { color: var(--heading); }
+    .nav-link:hover::after,
+    .nav-link.is-active::after { transform: scaleX(1); }
+    .mobile-menu {
+      background: var(--menu);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+    }
+    .mobile-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 0.9rem;
+      border-radius: 0.7rem;
+      font-size: 0.92rem;
+      color: var(--text);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .mobile-link:hover { background: var(--chip); color: var(--heading); }
+    .icon-btn {
+      display: inline-grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      flex: none;
+      border-radius: 0.7rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .icon-btn:hover { color: var(--heading); border-color: var(--accent); transform: translateY(-1px); }
+    [data-theme="dark"] .icon-sun { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
+    [data-theme="light"] .icon-sun { display: none; }
+    [data-theme="light"] .icon-moon { display: block; }
+
+    /* ---------- Buttons & links ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.85rem 1.3rem;
+      border-radius: 0.85rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.2;
+      white-space: nowrap;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    }
+    .btn svg { flex: none; }
+    .btn-primary {
+      color: #fff;
+      background-image: linear-gradient(120deg, #6366f1 0%, #7c3aed 52%, #2563eb 115%);
+      box-shadow: 0 14px 34px -14px rgba(99, 102, 241, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 42px -16px rgba(99, 102, 241, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+      filter: saturate(112%);
+    }
+    .btn-secondary {
+      color: var(--heading);
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+    }
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: var(--card-solid);
+    }
+    .btn-sm { padding: 0.62rem 0.95rem; font-size: 0.82rem; border-radius: 0.7rem; }
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--heading);
+      transition: color 0.2s ease, gap 0.2s ease;
+    }
+    .link-arrow:hover { color: var(--accent); gap: 0.6rem; }
+
+    /* ---------- Type helpers ---------- */
+    .eyebrow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      max-width: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      overflow-wrap: anywhere;
+    }
+    .gradient-text {
+      background-image: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.34rem 0.66rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: var(--chip);
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      flex: none;
+      border-radius: 999px;
+      background: var(--dot, var(--accent));
+      box-shadow: 0 0 9px var(--dot, var(--accent));
+    }
+
+    /* ---------- Cards & components ---------- */
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--chip);
+      font-family: 'Inter', 'Prompt', 'Noto Sans Thai', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      flex: none;
+      border-radius: 999px;
+      background: #34d399;
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5);
+      animation: pulseDot 2.2s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.45); }
+      55% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 0%, #000 25%, transparent 78%);
+      mask-image: radial-gradient(ellipse 75% 65% at 50% 0%, #000 25%, transparent 78%);
+      pointer-events: none;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    /* Terminal window */
+    .code-window {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: #080d18;
+      box-shadow: 0 45px 110px -45px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+    .code-window pre { margin: 0; }
+    .term-chip {
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.35rem;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      background: rgba(148, 163, 184, 0.06);
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+    }
+
+    /* Project cards */
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 32px 80px -44px var(--glow);
+    }
+    .project-media {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: #0a1120;
+    }
+    .project-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .project-card:hover .project-media img { transform: scale(1.025); }
+    .media-tag,
+    .media-kind {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.28rem 0.5rem;
+      border-radius: 0.4rem;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: rgba(6, 10, 19, 0.68);
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .media-tag { top: 0.85rem; left: 0.85rem; }
+    .media-kind { right: 0.85rem; bottom: 0.85rem; color: #94a3b8; }
+    .ps-box {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.6rem;
+      align-items: start;
+      padding: 0.7rem 0.8rem;
+      border-radius: 0.7rem;
+      background: var(--chip);
+      border: 1px solid transparent;
+    }
+    .ps-label {
+      margin-top: 0.12rem;
+      padding: 0.18rem 0.38rem;
+      border-radius: 0.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.56rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+    .ps-label-problem { color: #fca5a5; background: rgba(248, 113, 113, 0.10); border: 1px solid rgba(248, 113, 113, 0.18); }
+    .ps-label-solution { color: #6ee7b7; background: rgba(52, 211, 153, 0.10); border: 1px solid rgba(52, 211, 153, 0.18); }
+    [data-theme="light"] .ps-label-problem { color: #b91c1c; background: rgba(185, 28, 28, 0.06); border-color: rgba(185, 28, 28, 0.14); }
+    [data-theme="light"] .ps-label-solution { color: #047857; background: rgba(4, 120, 87, 0.06); border-color: rgba(4, 120, 87, 0.14); }
+    .private-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.35rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+    }
+
+    /* Services & stack */
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.6rem;
+      border-radius: 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .service-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .service-icon {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 0.8rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--chip), transparent);
+      color: var(--accent);
+    }
+    .stack-group {
+      padding: 1.15rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: border-color 0.25s ease;
+    }
+    .stack-group:hover { border-color: var(--border-strong); }
+    .process-step {
+      position: relative;
+      padding: 1.2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+    .process-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    /* Contact */
+    .contact-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.75rem;
+      border: 1px solid var(--border-strong);
+      background:
+        radial-gradient(36rem 22rem at 8% 0%, var(--glow), transparent 62%),
+        linear-gradient(150deg, rgba(99, 102, 241, 0.06), transparent 46%),
+        var(--card);
+      box-shadow: var(--shadow);
+    }
+    .contact-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+      opacity: 0.8;
+    }
+    .contact-card {
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: var(--card-solid);
+      box-shadow: 0 24px 60px -38px rgba(0, 0, 0, 0.6);
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.75rem;
+      border-radius: 0.75rem;
+      border: 1px solid transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .contact-row:hover { background: var(--chip); border-color: var(--border); }
+    .contact-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      flex: none;
+      border-radius: 0.6rem;
+      border: 1px solid var(--border);
+      background: var(--chip);
+      color: var(--accent);
+    }
+    .copy-btn {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: none;
+      border-radius: 0.55rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .copy-btn:hover { color: var(--heading); border-color: var(--accent); background: var(--chip); }
+    .copy-btn.is-copied { color: #34d399; border-color: rgba(52, 211, 153, 0.4); background: rgba(52, 211, 153, 0.08); }
+
+    /* Footer, toast, utilities */
+    .footer-link {
+      font-size: 0.8rem;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    .footer-link:hover { color: var(--heading); }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 1.5rem;
+      z-index: 80;
+      max-width: calc(100vw - 2rem);
+      padding: 0.7rem 1rem;
+      border-radius: 0.7rem;
+      border: 1px solid var(--border-strong);
+      background: var(--card-solid);
+      color: var(--heading);
+      box-shadow: var(--shadow);
+      font-size: 0.8rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 14px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+    .to-top {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 40;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: var(--card-solid);
+      color: var(--muted);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .to-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
+    .to-top:hover { color: var(--heading); border-color: var(--accent); }
+    .skip-link {
+      position: fixed;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 100;
+      padding: 0.65rem 0.9rem;
+      border-radius: 0.5rem;
+      background: var(--card-solid);
+      color: var(--heading);
+      border: 1px solid var(--accent);
+      font-size: 0.85rem;
+      transform: translateY(-150%);
+      transition: transform 0.2s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    /* Scroll reveal (only when JS is available) */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+      transition-delay: var(--d, 0ms);
+    }
+    .js .reveal.is-visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body id="top" class="min-h-screen antialiased">
+  <div class="site-bg" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+  <a href="#main" class="skip-link">ข้ามไปยังเนื้อหาหลัก</a>
+
+  <div class="page-shell">
+    <!-- ============================== HEADER ============================== -->
+    <header id="siteHeader" class="site-header">
+      <div class="container-x flex h-[72px] items-center justify-between gap-3">
+        <a href="#top" class="flex items-center gap-3" aria-label="Jeeradate jk.dev — กลับขึ้นด้านบน">
+          <span class="brand-mark" aria-hidden="true">jk</span>
+          <span class="flex flex-col leading-tight">
+            <span class="text-[14px] font-semibold tracking-tight text-heading sm:text-[15px]">
+              Jeeradate <span class="hidden sm:inline"><span class="text-muted" aria-hidden="true">|</span> <span class="font-mono text-[13px] text-accent">jk.dev</span></span>
+            </span>
+            <span class="mt-0.5 font-mono text-[9px] tracking-[0.12em] text-accent2 sm:hidden">jk.dev</span>
+            <span class="mt-0.5 hidden whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.16em] text-muted xl:block">Python · Web Apps · Automation</span>
+          </span>
+        </a>
+
+        <nav class="hidden items-center gap-4 lg:flex xl:gap-6" aria-label="เมนูหลัก">
+          <a href="#projects" class="nav-link" data-nav>ผลงาน / Projects</a>
+          <a href="#stack" class="nav-link" data-nav>ทักษะ / Tech Stack</a>
+          <a href="#services" class="nav-link" data-nav>บริการ / Services</a>
+          <a href="#contact" class="nav-link" data-nav>ติดต่อ / Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" type="button" class="icon-btn" aria-label="สลับเป็นโหมดสว่าง" title="สลับโหมดสว่าง/มืด">
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+            </svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z"/>
+            </svg>
+          </button>
+
+          <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm hidden sm:inline-flex">
+            จ้างงานบน Fastwork
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+
+          <button id="menuToggle" type="button" class="icon-btn lg:hidden" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="mobileMenu">
+            <svg id="menuIconOpen" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            <svg id="menuIconClose" class="hidden" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobileMenu" class="mobile-menu lg:hidden" hidden>
+        <nav class="container-x py-4" aria-label="เมนูมือถือ">
+          <div class="grid gap-1">
+            <a href="#projects" class="mobile-link" data-nav>ผลงาน / Projects <span aria-hidden="true">↗</span></a>
+            <a href="#stack" class="mobile-link" data-nav>ทักษะ / Tech Stack <span aria-hidden="true">↗</span></a>
+            <a href="#services" class="mobile-link" data-nav>บริการ / Services <span aria-hidden="true">↗</span></a>
+            <a href="#contact" class="mobile-link" data-nav>ติดต่อ / Contact <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="mt-3 grid gap-2">
+            <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full">
+              จ้างงานผ่าน Fastwork (jk.dev)
+            </a>
+            <a href="https://github.com/jeeradate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary w-full">
+              GitHub Profile
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============================== HERO ============================== -->
+      <section class="relative overflow-hidden pb-16 pt-32 sm:pt-36 lg:pb-20 lg:pt-40">
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div class="hero-grid"></div>
+          <div class="hero-orb -right-24 -top-24 h-[26rem] w-[26rem]" style="background:rgba(99,102,241,.20)"></div>
+          <div class="hero-orb -left-32 top-48 h-[22rem] w-[22rem]" style="background:rgba(45,212,191,.10)"></div>
+        </div>
+
+        <div class="container-x relative">
+          <div class="grid items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] lg:gap-10 xl:gap-14">
+            <div class="reveal min-w-0">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="availability"><span class="pulse-dot" aria-hidden="true"></span> เปิดรับงาน Freelance · Remote</span>
+                <span class="availability hidden sm:inline-flex">ERP &amp; Manufacturing background</span>
+              </div>
+
+              <p class="eyebrow mt-6">Industrial Engineer <span aria-hidden="true">→</span> Full-Stack Python Developer</p>
+
+              <h1 class="mt-4 font-thai text-[1.7rem] font-bold leading-[1.32] tracking-tight text-heading sm:text-[2.5rem] lg:text-[2.5rem] xl:text-[2.9rem]">
+                เปลี่ยน workflow ที่ติดขัด<br>
+                ให้เป็น <span class="gradient-text">ระบบที่ทำงานแทนคุณ</span>
+              </h1>
+
+              <p class="mt-5 max-w-xl text-[14.5px] leading-[1.9] text-muted sm:text-[15.5px]">
+                Full-Stack Python Developer ที่มีพื้นฐานวิศวกรรมอุตสาหการและระบบ ERP — รับสร้าง Web App, Internal Tools และ Windows Automation ที่ใช้งานได้จริงในหน้างาน ไม่ใช่แค่ demo สวย ๆ ช่วยลดงานซ้ำและลด human&nbsp;error
+              </p>
+
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full sm:w-auto">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z" stroke-linejoin="round"/></svg>
+                  จ้างงานผ่าน Fastwork (jk.dev)
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                </a>
+                <a href="https://github.com/jeeradate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary w-full sm:w-auto">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+                  ดูผลงานบน GitHub
+                </a>
+              </div>
+
+              <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2.5 text-[12.5px] text-muted">
+                <li class="flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="text-accent2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
+                  ประสบการณ์ระบบโรงงาน &amp; ERP
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="text-accent2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
+                  ส่งมอบพร้อม Source Code &amp; คู่มือ
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="text-accent2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>
+                  สื่อสารไทย / English
+                </li>
+              </ul>
+            </div>
+
+            <div class="reveal relative mx-auto w-full min-w-0 max-w-[580px]" style="--d:120ms">
+              <div class="code-window">
+                <div class="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+                  <div class="flex items-center gap-2">
+                    <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]" aria-hidden="true"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]" aria-hidden="true"></span>
+                    <span class="ml-2 font-mono text-[10.5px] text-slate-400">queue_system.py</span>
+                  </div>
+                  <span class="inline-flex items-center gap-1.5 font-mono text-[9.5px] tracking-[0.1em] text-emerald-400">
+                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true"></span> LIVE
+                  </span>
+                </div>
+
+                <pre class="overflow-x-auto px-4 py-4 font-mono text-[10.5px] leading-[1.85] text-slate-300 sm:px-5 sm:text-[11px] xl:text-[12.5px]"><code><span class="text-slate-500"># internal queue board · real-time</span>
+<span class="text-[#c084fc]">from</span> nicegui <span class="text-[#c084fc]">import</span> ui
+<span class="text-[#c084fc]">from</span> sqlmodel <span class="text-[#c084fc]">import</span> Field, SQLModel
+
+<span class="text-[#c084fc]">class</span> <span class="text-[#fde68a]">Ticket</span>(SQLModel, table=<span class="text-[#fbbf24]">True</span>):
+    id: <span class="text-[#7dd3fc]">int</span> | <span class="text-[#7dd3fc]">None</span> = Field(default=<span class="text-[#fbbf24]">None</span>, primary_key=<span class="text-[#fbbf24]">True</span>)
+    number: <span class="text-[#7dd3fc]">str</span>
+    counter: <span class="text-[#7dd3fc]">int</span> | <span class="text-[#7dd3fc]">None</span> = <span class="text-[#fbbf24]">None</span>
+
+<span class="text-[#22d3ee]">@ui.page</span>(<span class="text-[#6ee7b7]">'/board'</span>)
+<span class="text-[#c084fc]">def</span> <span class="text-[#fde68a]">queue_board</span>() -&gt; <span class="text-[#7dd3fc]">None</span>:
+    ui.label(<span class="text-[#6ee7b7]">'Now serving'</span>).classes(<span class="text-[#6ee7b7]">'eyebrow'</span>)
+    ui.timer(<span class="text-[#fbbf24]">1.0</span>, refresh_from_db)
+
+ui.run(title=<span class="text-[#6ee7b7]">'Queue System'</span>, port=<span class="text-[#fbbf24]">8080</span>)</code></pre>
+
+                <div class="flex items-center justify-between gap-3 border-t border-white/10 px-4 py-3">
+                  <div class="flex flex-wrap gap-1.5">
+                    <span class="term-chip">NiceGUI</span>
+                    <span class="term-chip">SQLModel</span>
+                    <span class="term-chip">SQLite / PostgreSQL</span>
+                  </div>
+                  <span class="font-mono text-[9.5px] text-slate-500">Python 3.12</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== QUICK STATS ============================== -->
+      <section aria-label="ภาพรวมประสบการณ์และจุดเด่น">
+        <div class="border-y border-line bg-base2">
+          <div class="container-x">
+            <div class="grid grid-cols-2 gap-px bg-line lg:grid-cols-4">
+              <div class="bg-base2 p-6 sm:p-7">
+                <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Featured Work</p>
+                <p class="mt-2 whitespace-nowrap font-mono text-xl font-semibold text-heading sm:text-2xl">04<span class="ml-1.5 text-[11px] font-normal text-muted">projects</span></p>
+                <p class="mt-1 text-[11.5px] text-muted">คัดสรรจากงานที่แก้ปัญหาจริง</p>
+              </div>
+              <div class="bg-base2 p-6 sm:p-7">
+                <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Production Tools</p>
+                <p class="mt-2 whitespace-nowrap font-mono text-xl font-semibold text-heading sm:text-2xl">10+<span class="ml-1.5 text-[11px] font-normal text-muted">technologies</span></p>
+                <p class="mt-1 text-[11.5px] text-muted">Python · SQL · Automation</p>
+              </div>
+              <div class="bg-base2 p-6 sm:p-7">
+                <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Platforms</p>
+                <p class="mt-2 whitespace-nowrap font-mono text-xl font-semibold text-heading sm:text-2xl">Web<span class="text-muted"> + </span>Windows</p>
+                <p class="mt-1 text-[11.5px] text-muted">Full-stack &amp; desktop utilities</p>
+              </div>
+              <div class="bg-base2 p-6 sm:p-7">
+                <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Handover</p>
+                <p class="mt-2 whitespace-nowrap font-mono text-xl font-semibold text-heading sm:text-2xl">Source<span class="ml-1.5 text-[11px] font-normal text-muted">+ docs</span></p>
+                <p class="mt-1 text-[11.5px] text-muted">ส่งมอบโค้ดและคู่มือทุกงาน</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== PROJECTS ============================== -->
+      <section id="projects" class="section">
+        <div class="container-x">
+          <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div class="reveal max-w-2xl">
+              <p class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-accent2" aria-hidden="true"></span> ผลงาน / SELECTED WORK</p>
+              <h2 class="mt-3 font-thai text-3xl font-bold leading-[1.3] text-heading sm:text-4xl">ระบบที่แก้ปัญหาจริง<br class="hidden sm:block"> ไม่ใช่แค่ Demo</h2>
+              <p class="mt-4 text-[14.5px] leading-relaxed text-muted">
+                ทุกโปรเจกต์เริ่มจากปัญหาหน้างาน — คิวที่แน่นเกินไป ออเดอร์ที่พลาด notification งานพิมพ์ซ้ำ ๆ หรือระบบหลังบ้านที่แพงเกินจำเป็น ผมออกแบบเครื่องมือที่ตอบโจทย์นั้นโดยตรง
+              </p>
+            </div>
+            <a href="https://github.com/jeeradate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm reveal shrink-0 self-start sm:self-auto" style="--d:80ms">
+              ดูทั้งหมดบน GitHub
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+
+          <div class="mt-10 grid gap-6 lg:grid-cols-2">
+            <!-- Project 1: Queue -->
+            <article class="project-card reveal">
+              <div class="project-media">
+                <!-- Replace with a real screenshot/GIF, e.g. assets/images/queue-preview.png -->
+                <img src="assets/images/queue-preview.svg" alt="ภาพตัวอย่างหน้าจอระบบจัดการคิวแบบ real-time แสดงคิวปัจจุบัน A-024 และรายการรอ" width="1200" height="750" loading="lazy" decoding="async">
+                <span class="media-tag"><span class="pulse-dot" aria-hidden="true"></span> INTERNAL TOOL · REALTIME</span>
+                <span class="media-kind">UI PREVIEW</span>
+              </div>
+              <div class="flex flex-1 flex-col p-5 sm:p-6">
+                <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">01 · Queue Management</p>
+                <h3 class="mt-2 font-thai text-[1.2rem] font-semibold leading-snug text-heading sm:text-[1.35rem]">Real-Time Hospital &amp; Clinic Queue</h3>
+                <p class="mt-1 text-[12.5px] text-muted">ระบบคิวโรงพยาบาล &amp; คลินิกแบบ real-time</p>
+
+                <div class="mt-4 space-y-2.5">
+                  <div class="ps-box">
+                    <span class="ps-label ps-label-problem">PROBLEM</span>
+                    <p class="text-[12.5px] leading-relaxed text-muted">ผู้ป่วยต้องรอในพื้นที่แออัดโดยไม่รู้ว่าคิวถึงไหน ขณะที่เจ้าหน้าที่ต้องเรียกคิวด้วยมือและเสี่ยงต่อการเรียกผิดพลาด</p>
+                  </div>
+                  <div class="ps-box">
+                    <span class="ps-label ps-label-solution">SOLUTION</span>
+                    <p class="text-[12.5px] leading-relaxed text-muted">Web App จัดการคิวแบบ real-time — ผู้ป่วยติดตามสถานะผ่านมือถือ เจ้าหน้าที่เรียกคิวที่ counter แล้วหน้าจออัปเดตทันทีโดยไม่ต้อง refresh</p>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  <span class="chip"><span class="chip-dot" style="--dot:#3776ab" aria-hidden="true"></span>Python</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#5898d4" aria-hidden="true"></span>NiceGUI</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#7e57c2" aria-hidden="true"></span>SQLModel</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#4b8bbe" aria-hidden="true"></span>SQLite / PostgreSQL</span>
+                </div>
+
+                <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+                  <span class="private-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Internal / Private system</span>
+                  <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="link-arrow">ขอ Demo <span aria-hidden="true">→</span></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 2: SPAPP -->
+            <article class="project-card reveal" style="--d:80ms">
+              <div class="project-media">
+                <!-- Replace with a real screenshot/GIF, e.g. assets/images/spapp-preview.png -->
+                <img src="assets/images/spapp-preview.svg" alt="ภาพตัวอย่างหน้าจอ SPAPP แจ้งเตือนออเดอร์ใหม่จาก Shopee พร้อมรายการออเดอร์และยอดขายวันนี้" width="1200" height="750" loading="lazy" decoding="async">
+                <span class="media-tag">SELLER TOOL · NOTIFICATIONS</span>
+                <span class="media-kind">UI PREVIEW</span>
+              </div>
+              <div class="flex flex-1 flex-col p-5 sm:p-6">
+                <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">02 · E-commerce Operations</p>
+                <h3 class="mt-2 font-thai text-[1.2rem] font-semibold leading-snug text-heading sm:text-[1.35rem]">Shopee Seller Notification &amp; Order Monitoring</h3>
+                <p class="mt-1 text-[12.5px] text-muted">แจ้งเตือนและติดตามออเดอร์สำหรับผู้ขาย</p>
+
+                <div class="mt-4 space-y-2.5">
+                  <div class="ps-box">
+                    <span class="ps-label ps-label-problem">PROBLEM</span>
+                    <p class="text-[12.5px] leading-relaxed text-muted">ผู้ขายพลาดออเดอร์ด่วนเพราะต้องเปิด seller dashboard ตรวจเองตลอดวัน และเสียเวลากับการเช็กซ้ำ ๆ</p>
+                  </div>
+                  <div class="ps-box">
+                    <span class="ps-label ps-label-solution">SOLUTION</span>
+                    <p class="text-[12.5px] leading-relaxed text-muted">Utility ติดตามออเดอร์และแจ้งเตือนทันทีทั้งบน desktop และ web พร้อมสรุปออเดอร์ที่ต้องจัดการ ลดการพลาดและลดเวลาตรวจ manual</p>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  <span class="chip"><span class="chip-dot" style="--dot:#3776ab" aria-hidden="true"></span>Python</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#5898d4" aria-hidden="true"></span>NiceGUI</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#7e57c2" aria-hidden="true"></span>SQLModel</span>
+                </div>
+
+                <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+                  <span class="private-pill">Desktop + Web notifications</span>
+                  <a href="https://github.com/jeeradate/spapp" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+                    Source Code
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 3: HotString -->
+            <article class="project-card reveal">
+              <div class="project-media">
+                <!-- Replace with a real screenshot/GIF, e.g. assets/images/hotstring-preview.png -->
+                <img src="assets/images/hotstring-preview.svg" alt="ภาพตัวอย่างหน้าจอ HotString แสดง hotkey สำหรับ text expansion, terminal PowerShell 7 และ system tray" width="1200" height="750" loading="lazy" decoding="async">
+                <span class="media-tag">WINDOWS UTILITY · AUTOMATION</span>
+                <span class="media-kind">UI PREVIEW</span>
+              </div>
+              <div class="flex flex-1 flex-col p-5 sm:p-6">
+                <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">03 · Desktop Automation</p>
+                <h3 class="mt-2 font-thai text-[1.2rem] font-semibold leading-snug text-heading sm:text-[1.35rem]">HotString &amp; Windows Desktop Automation</h3>
+                <p class="mt-1 text-[12.5px] text-muted">เครื่องมือ automate งานพิมพ์และ workflow บน Windows</p>
+
+                <div class="mt-4 space-y-2.5">
+                  <div class="ps-box">
+                    <span class="ps-label ps-label-problem">PROBLEM</span>
+                    <p class="text-[12.5px] leading-relaxed text-muted">งานพิมพ์ซ้ำ ๆ การเปิดหลายแอป และ hotkey ที่ชนกับโปรแกรมอื่น ทำให้เสียเวลาและเกิดข้อผิดพลาดทุกวัน</p>
+                  </div>
+                  <div class="ps-box">
+                    <span class="ps-label ps-label-solution">SOLUTION</span>
+                    <p class="text-[12.5px] leading-relaxed text-muted">แอป system tray สำหรับ text expansion, รัน PowerShell และจับเวลาทำงาน โดยไม่แย่ง hotkey ของแอปเดิม พร้อมเก็บ preset ใน SQLite</p>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  <span class="chip"><span class="chip-dot" style="--dot:#3776ab" aria-hidden="true"></span>Python</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#5391fe" aria-hidden="true"></span>PowerShell 7</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#4b8bbe" aria-hidden="true"></span>SQLite</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#e8b64c" aria-hidden="true"></span>AutoHotkey v2</span>
+                </div>
+
+                <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+                  <span class="private-pill">Runs in system tray</span>
+                  <div class="flex items-center gap-3">
+                    <a href="https://github.com/jeeradate/hotstring" target="_blank" rel="noopener noreferrer" class="link-arrow">hotstring</a>
+                    <span class="text-line" aria-hidden="true">·</span>
+                    <a href="https://github.com/jeeradate/AHK" target="_blank" rel="noopener noreferrer" class="link-arrow">AHK</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 4: Food order -->
+            <article class="project-card reveal" style="--d:80ms">
+              <div class="project-media">
+                <!-- Replace with a real screenshot/GIF, e.g. assets/images/foodorder-preview.png -->
+                <img src="assets/images/foodorder-preview.svg" alt="ภาพตัวอย่างหน้าจอระบบสั่งอาหารและจัดการข้อมูลแบบ multi-role แสดงเมนูและสรุปออเดอร์" width="1200" height="750" loading="lazy" decoding="async">
+                <span class="media-tag">FULL-STACK · ROLE-BASED</span>
+                <span class="media-kind">UI PREVIEW</span>
+              </div>
+              <div class="flex flex-1 flex-col p-5 sm:p-6">
+                <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">04 · Business Systems</p>
+                <h3 class="mt-2 font-thai text-[1.2rem] font-semibold leading-snug text-heading sm:text-[1.35rem]">Food Order &amp; Multi-Role Contact Management</h3>
+                <p class="mt-1 text-[12.5px] text-muted">ระบบสั่งอาหารและจัดการข้อมูลแบบ multi-role</p>
+
+                <div class="mt-4 space-y-2.5">
+                  <div class="ps-box">
+                    <span class="ps-label ps-label-problem">PROBLEM</span>
+                    <p class="text-[12.5px] leading-relaxed text-muted">ธุรกิจเล็กต้องใช้ CRUD / order tracking ที่ปรับให้เข้ากับหน้างาน แต่ซื้อ SaaS ราคาสูงและแก้ไขอะไรไม่ได้</p>
+                  </div>
+                  <div class="ps-box">
+                    <span class="ps-label ps-label-solution">SOLUTION</span>
+                    <p class="text-[12.5px] leading-relaxed text-muted">Full-stack web app ที่มี relational database, role-based access และ UI responsive — ต่อยอดเป็นระบบสั่งอาหารหรือระบบจัดการลูกค้าได้</p>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  <span class="chip"><span class="chip-dot" style="--dot:#3776ab" aria-hidden="true"></span>Python</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#5898d4" aria-hidden="true"></span>NiceGUI</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#7e57c2" aria-hidden="true"></span>SQLModel</span>
+                  <span class="chip"><span class="chip-dot" style="--dot:#d71f00" aria-hidden="true"></span>SQLAlchemy</span>
+                </div>
+
+                <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+                  <span class="private-pill">CRUD · Roles · Reports</span>
+                  <a href="https://github.com/jeeradate/foodorderapp" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+                    Source Code
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="mt-10 flex flex-col items-center gap-3 text-center reveal">
+            <p class="text-[12.5px] text-muted">อยากเห็นรายละเอียดเชิงเทคนิคหรือทดลองใช้งาน demo?</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">นัดคุย / ขอ Demo</a>
+              <a href="https://github.com/jeeradate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">ดูโปรเจกต์ทั้งหมด</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== TECH STACK ============================== -->
+      <section id="stack" class="section band">
+        <div class="container-x">
+          <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+            <div class="reveal">
+              <p class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-accent2" aria-hidden="true"></span> ทักษะ / TECH STACK</p>
+              <h2 class="mt-3 font-thai text-3xl font-bold leading-[1.3] text-heading sm:text-4xl">เครื่องมือที่ผมใช้<br class="hidden sm:block"> ส่งงานจริง</h2>
+              <p class="mt-4 max-w-md text-[14.5px] leading-relaxed text-muted">
+                ไม่ยึดติดกับ stack เดียว — เลือกเทคโนโลยีที่เสถียร ดูแลต่อได้ และเหมาะกับข้อจำกัดของแต่ละงาน ตั้งแต่ prototype ไปจนถึงระบบที่ใช้งานทุกวัน
+              </p>
+
+              <div class="card mt-7 overflow-hidden">
+                <div class="flex items-center gap-2 border-b border-line px-4 py-2.5">
+                  <span class="h-2 w-2 rounded-full bg-[#ff5f57]" aria-hidden="true"></span>
+                  <span class="h-2 w-2 rounded-full bg-[#febc2e]" aria-hidden="true"></span>
+                  <span class="h-2 w-2 rounded-full bg-[#28c840]" aria-hidden="true"></span>
+                  <span class="ml-auto font-mono text-[9px] uppercase tracking-[0.14em] text-muted">PowerShell 7</span>
+                </div>
+                <div class="px-4 py-4 font-mono text-[11.5px] leading-relaxed">
+                  <p class="text-muted"><span class="text-accent2">PS&gt;</span> python -m jk.dev --stack</p>
+                  <p class="mt-1 text-heading">Python-first · SQL-native · Automation-ready</p>
+                  <p class="mt-1 text-muted"><span class="text-accent2">PS&gt;</span> <span class="inline-block h-3 w-1.5 translate-y-0.5 bg-accent2" aria-hidden="true"></span></p>
+                </div>
+              </div>
+
+              <p class="mt-4 flex items-start gap-2 text-[12px] leading-relaxed text-muted">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5 shrink-0 text-accent2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2"/></svg>
+                เรียนรู้เทคโนโลยีใหม่ได้เร็ว เพราะโฟกัสที่ fundamentals และการแก้ปัญหา
+              </p>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
+              <div class="stack-group reveal">
+                <div class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                  <h3 class="font-mono text-[10px] uppercase tracking-[0.14em] text-heading">Web &amp; Interface</h3>
+                </div>
+                <p class="mt-2 text-[10.5px] leading-relaxed text-muted">Responsive UI, component และ real-time update</p>
+                <ul class="mt-3 flex flex-wrap gap-1.5">
+                  <li class="chip"><span class="chip-dot" style="--dot:#3776ab" aria-hidden="true"></span>Python 3.12+</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#5898d4" aria-hidden="true"></span>NiceGUI</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#e34f26" aria-hidden="true"></span>HTML / CSS / JS</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#38bdf8" aria-hidden="true"></span>Tailwind CSS</li>
+                </ul>
+              </div>
+
+              <div class="stack-group reveal" style="--d:60ms">
+                <div class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-accent2" aria-hidden="true"></span>
+                  <h3 class="font-mono text-[10px] uppercase tracking-[0.14em] text-heading">Data &amp; API</h3>
+                </div>
+                <p class="mt-2 text-[10.5px] leading-relaxed text-muted">Schema design, migration และ query ที่ดูแลต่อได้</p>
+                <ul class="mt-3 flex flex-wrap gap-1.5">
+                  <li class="chip"><span class="chip-dot" style="--dot:#7e57c2" aria-hidden="true"></span>SQLModel</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#009688" aria-hidden="true"></span>FastAPI</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#d71f00" aria-hidden="true"></span>SQLAlchemy</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#4b8bbe" aria-hidden="true"></span>SQLite</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#4169e1" aria-hidden="true"></span>PostgreSQL</li>
+                </ul>
+              </div>
+
+              <div class="stack-group reveal" style="--d:120ms">
+                <div class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                  <h3 class="font-mono text-[10px] uppercase tracking-[0.14em] text-heading">Windows Automation</h3>
+                </div>
+                <p class="mt-2 text-[10.5px] leading-relaxed text-muted">Tray app, scheduled job และ PowerShell integration</p>
+                <ul class="mt-3 flex flex-wrap gap-1.5">
+                  <li class="chip"><span class="chip-dot" style="--dot:#5391fe" aria-hidden="true"></span>PowerShell 7</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#e8b64c" aria-hidden="true"></span>AutoHotkey v2</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#818cf8" aria-hidden="true"></span>Task Scheduler</li>
+                </ul>
+              </div>
+
+              <div class="stack-group reveal" style="--d:180ms">
+                <div class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-accent2" aria-hidden="true"></span>
+                  <h3 class="font-mono text-[10px] uppercase tracking-[0.14em] text-heading">Workflow &amp; Delivery</h3>
+                </div>
+                <p class="mt-2 text-[10.5px] leading-relaxed text-muted">Version control, reproducible env และการ deploy</p>
+                <ul class="mt-3 flex flex-wrap gap-1.5">
+                  <li class="chip"><span class="chip-dot" style="--dot:#de5fe9" aria-hidden="true"></span>uv</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#f05032" aria-hidden="true"></span>Git &amp; GitHub</li>
+                  <li class="chip"><span class="chip-dot" style="--dot:#94a3b8" aria-hidden="true"></span>GitHub Pages</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== SERVICES ============================== -->
+      <section id="services" class="section">
+        <div class="container-x">
+          <div class="reveal max-w-2xl">
+            <p class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-accent2" aria-hidden="true"></span> บริการ / SERVICES</p>
+            <h2 class="mt-3 font-thai text-3xl font-bold leading-[1.3] text-heading sm:text-4xl">รับงานแบบ End-to-End<br class="hidden sm:block"> ตั้งแต่โจทย์ถึงระบบที่รันจริง</h2>
+            <p class="mt-4 text-[14.5px] leading-relaxed text-muted">
+              เลือกได้ทั้งงานพัฒนาใหม่ ปรับระบบเดิม หรือให้ช่วยสอนและรีวิวโค้ด — ทุกงานมี scope ชัดเจน สื่อสารตรงไปตรงมา และส่งมอบเป็นรอบ
+            </p>
+          </div>
+
+          <div class="mt-10 grid gap-5 lg:grid-cols-3">
+            <article class="service-card reveal">
+              <div class="flex items-start justify-between gap-3">
+                <span class="service-icon" aria-hidden="true">
+                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="15" rx="2.5"/><path d="M3 9h18M8 4V2M16 4V2"/><path d="M8 14h3"/></svg>
+                </span>
+                <span class="font-mono text-[10px] tracking-[0.14em] text-muted">01</span>
+              </div>
+              <h3 class="mt-4 font-thai text-[1.15rem] font-semibold text-heading">Custom Web Application</h3>
+              <p class="mt-1 font-mono text-[9.5px] uppercase tracking-[0.12em] text-accent">Internal Tools &amp; Dashboards</p>
+              <p class="mt-3 flex-1 text-[13px] leading-relaxed text-muted">
+                ออกแบบและพัฒนา web app สำหรับงานภายในองค์กร ตั้งแต่ระบบคิว ออเดอร์ ไปจนถึง inventory และ dashboard สรุปยอด
+              </p>
+              <ul class="mt-4 space-y-2 text-[12px] text-muted">
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>Queue / Order / Inventory systems</li>
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>Role-based access &amp; authentication</li>
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>PostgreSQL / SQLite + deploy-ready</li>
+              </ul>
+              <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="link-arrow mt-5 flex w-full items-center justify-between border-t border-line pt-4">สอบถามบริการ <span aria-hidden="true">→</span></a>
+            </article>
+
+            <article class="service-card reveal" style="--d:70ms">
+              <div class="flex items-start justify-between gap-3">
+                <span class="service-icon" aria-hidden="true">
+                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="font-mono text-[10px] tracking-[0.14em] text-muted">02</span>
+              </div>
+              <h3 class="mt-4 font-thai text-[1.15rem] font-semibold text-heading">Windows &amp; Workflow Automation</h3>
+              <p class="mt-1 font-mono text-[9.5px] uppercase tracking-[0.12em] text-accent">Python · PowerShell · AutoHotkey</p>
+              <p class="mt-3 flex-1 text-[13px] leading-relaxed text-muted">
+                ลดงาน manual บน Windows ด้วย utility ที่รันเบา ๆ ใน system tray, scheduled jobs และ integration กับไฟล์หรือระบบเดิม
+              </p>
+              <ul class="mt-4 space-y-2 text-[12px] text-muted">
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent2" aria-hidden="true"></span>Text expansion &amp; hotkey workflows</li>
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent2" aria-hidden="true"></span>PowerShell 7 automation scripts</li>
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent2" aria-hidden="true"></span>Tray apps ที่ไม่ชนกับ hotkey เดิม</li>
+              </ul>
+              <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="link-arrow mt-5 flex w-full items-center justify-between border-t border-line pt-4">สอบถามบริการ <span aria-hidden="true">→</span></a>
+            </article>
+
+            <article class="service-card reveal" style="--d:140ms">
+              <div class="flex items-start justify-between gap-3">
+                <span class="service-icon" aria-hidden="true">
+                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
+                </span>
+                <span class="font-mono text-[10px] tracking-[0.14em] text-muted">03</span>
+              </div>
+              <h3 class="mt-4 font-thai text-[1.15rem] font-semibold text-heading">Python Mentoring / Tutoring</h3>
+              <p class="mt-1 font-mono text-[9.5px] uppercase tracking-[0.12em] text-accent">1-on-1 Remote Session</p>
+              <p class="mt-3 flex-1 text-[13px] leading-relaxed text-muted">
+                เรียน Python, NiceGUI, SQLModel หรือ FastAPI แบบตัวต่อตัว เน้นลงมือทำจริงและแก้โจทย์จากโปรเจกต์ของคุณเอง
+              </p>
+              <ul class="mt-4 space-y-2 text-[12px] text-muted">
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>Basic → Full-stack Python</li>
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>Code review &amp; debugging</li>
+                <li class="flex items-start gap-2"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>เรียนออนไลน์ภาษาไทย / English</li>
+              </ul>
+              <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="link-arrow mt-5 flex w-full items-center justify-between border-t border-line pt-4">สอบถามบริการ <span aria-hidden="true">→</span></a>
+            </article>
+          </div>
+
+          <div class="mt-14">
+            <div class="flex items-center gap-4 reveal">
+              <h3 class="font-thai text-lg font-semibold text-heading">กระบวนการทำงาน</h3>
+              <div class="h-px flex-1 bg-line" aria-hidden="true"></div>
+              <span class="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-muted sm:block">Clear scope · Iterative delivery</span>
+            </div>
+            <ol class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <li class="process-step reveal">
+                <span class="process-num">01</span>
+                <h4 class="mt-2 text-[13.5px] font-semibold text-heading">คุยโจทย์ &amp; Scope</h4>
+                <p class="mt-1.5 text-[11.5px] leading-relaxed text-muted">เข้าใจ workflow ปัญหา และผลลัพธ์ที่ต้องการก่อนเริ่มเขียนโค้ด</p>
+              </li>
+              <li class="process-step reveal" style="--d:60ms">
+                <span class="process-num">02</span>
+                <h4 class="mt-2 text-[13.5px] font-semibold text-heading">ออกแบบ Solution</h4>
+                <p class="mt-1.5 text-[11.5px] leading-relaxed text-muted">เลือก stack และออกแบบ data flow ที่เหมาะกับทีมและงบประมาณ</p>
+              </li>
+              <li class="process-step reveal" style="--d:120ms">
+                <span class="process-num">03</span>
+                <h4 class="mt-2 text-[13.5px] font-semibold text-heading">พัฒนาเป็นรอบ</h4>
+                <p class="mt-1.5 text-[11.5px] leading-relaxed text-muted">เห็นความคืบหน้าทุก milestone และปรับรายละเอียดได้ก่อนส่งมอบ</p>
+              </li>
+              <li class="process-step reveal" style="--d:180ms">
+                <span class="process-num">04</span>
+                <h4 class="mt-2 text-[13.5px] font-semibold text-heading">ส่งมอบ &amp; แนะนำ</h4>
+                <p class="mt-1.5 text-[11.5px] leading-relaxed text-muted">Source code, คู่มือใช้งาน และแนวทางดูแลระบบต่อในอนาคต</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== CONTACT ============================== -->
+      <section id="contact" class="section">
+        <div class="container-x">
+          <div class="contact-panel reveal">
+            <div class="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:p-10">
+              <div class="flex flex-col justify-center">
+                <p class="eyebrow"><span class="h-1.5 w-1.5 rounded-full bg-accent2" aria-hidden="true"></span> ติดต่อ / CONTACT</p>
+                <h2 class="mt-3 font-thai text-[1.75rem] font-bold leading-[1.35] text-heading sm:text-4xl">
+                  มี workflow ที่อยากให้ Automate<br class="hidden sm:block"> หรือระบบที่อยากให้สร้าง?
+                </h2>
+                <p class="mt-4 max-w-lg text-[14px] leading-[1.9] text-muted">
+                  เล่าโจทย์มาได้เลย — ผมจะช่วยประเมินขอบเขต เวลา และแนวทางที่คุ้มที่สุดสำหรับธุรกิจหรือทีมของคุณ ไม่ต้องมี spec ครบก็เริ่มคุยได้
+                </p>
+
+                <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full sm:w-auto">
+                    จ้างงานผ่าน Fastwork (jk.dev)
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                  </a>
+                  <a href="https://github.com/jeeradate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary w-full sm:w-auto">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+                    GitHub Profile
+                  </a>
+                </div>
+
+                <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[11.5px] text-muted">
+                  <li class="flex items-center gap-1.5"><span class="h-1 w-1 rounded-full bg-accent2" aria-hidden="true"></span>รับงาน Remote</li>
+                  <li class="flex items-center gap-1.5"><span class="h-1 w-1 rounded-full bg-accent2" aria-hidden="true"></span>สื่อสารไทย / English</li>
+                  <li class="flex items-center gap-1.5"><span class="h-1 w-1 rounded-full bg-accent2" aria-hidden="true"></span>Fastwork protected payment</li>
+                </ul>
+              </div>
+
+              <div class="contact-card p-4 sm:p-5">
+                <div class="flex items-center justify-between gap-3 px-1 pb-3">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Direct Channels</p>
+                  <span class="inline-flex items-center gap-1.5 font-mono text-[9px] tracking-[0.08em] text-emerald-500">
+                    <span class="pulse-dot" aria-hidden="true"></span> AVAILABLE
+                  </span>
+                </div>
+
+                <div class="grid gap-1">
+                  <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="contact-row">
+                    <span class="contact-icon" aria-hidden="true">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z" stroke-linejoin="round"/></svg>
+                    </span>
+                    <span class="min-w-0 flex-1">
+                      <span class="block font-mono text-[9px] uppercase tracking-[0.12em] text-muted">Fastwork Profile</span>
+                      <span class="block truncate text-[12.5px] font-medium text-heading">fastwork.com/user/jk.dev</span>
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-muted" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                  </a>
+
+                  <a href="https://github.com/jeeradate" target="_blank" rel="noopener noreferrer" class="contact-row">
+                    <span class="contact-icon" aria-hidden="true">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+                    </span>
+                    <span class="min-w-0 flex-1">
+                      <span class="block font-mono text-[9px] uppercase tracking-[0.12em] text-muted">GitHub</span>
+                      <span class="block truncate text-[12.5px] font-medium text-heading">github.com/jeeradate</span>
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-muted" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                  </a>
+
+                  <!-- TODO: replace hello@jk.dev with your real email (visible text + data-copy). -->
+                  <div class="contact-row">
+                    <span class="contact-icon" aria-hidden="true">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+                    </span>
+                    <span class="min-w-0 flex-1">
+                      <span class="block font-mono text-[9px] uppercase tracking-[0.12em] text-muted">Email</span>
+                      <span id="emailValue" class="block truncate text-[12.5px] font-medium text-heading">hello@jk.dev</span>
+                    </span>
+                    <button type="button" class="copy-btn" data-copy="hello@jk.dev" aria-label="คัดลอกอีเมล hello@jk.dev" title="คัดลอกอีเมล">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                  </div>
+
+                  <!-- TODO: replace @jkdev with your real LINE ID (visible text + data-copy). -->
+                  <div class="contact-row">
+                    <span class="contact-icon" aria-hidden="true">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.13-2.9-.37L4 21l1.2-3.6C3.2 15.9 3 13.8 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5Z"/><path d="M8 10.5v2M12 10v3M16 10v2"/></svg>
+                    </span>
+                    <span class="min-w-0 flex-1">
+                      <span class="block font-mono text-[9px] uppercase tracking-[0.12em] text-muted">LINE ID</span>
+                      <span id="lineValue" class="block truncate text-[12.5px] font-medium text-heading">@jkdev</span>
+                    </span>
+                    <button type="button" class="copy-btn" data-copy="@jkdev" aria-label="คัดลอก LINE ID @jkdev" title="คัดลอก LINE ID">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <p class="mt-3 border-t border-line px-1 pt-3 text-[10.5px] leading-relaxed text-muted">
+                  แนะนำให้เริ่มผ่าน Fastwork เพื่อความชัดเจนเรื่อง scope และการชำระเงิน
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="relative z-10 border-t border-line bg-base2">
+    <div class="container-x py-12">
+      <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div>
+          <a href="#top" class="inline-flex items-center gap-3" aria-label="Jeeradate jk.dev — กลับขึ้นด้านบน">
+            <span class="brand-mark" aria-hidden="true">jk</span>
+            <span class="flex flex-col leading-tight">
+              <span class="text-[15px] font-semibold text-heading">Jeeradate <span class="text-muted">|</span> <span class="font-mono text-[13px] text-accent">jk.dev</span></span>
+              <span class="mt-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-muted">Practical systems. Clean code.</span>
+            </span>
+          </a>
+          <p class="mt-4 max-w-sm text-[13px] leading-relaxed text-muted">
+            Full-Stack Python Developer &amp; Automation Engineer — สร้าง web apps, internal tools และ workflow automation สำหรับงานจริง
+          </p>
+          <div class="mt-5 flex items-center gap-2">
+            <a href="https://github.com/jeeradate" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub Profile">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+            </a>
+            <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="Fastwork Profile">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Navigate</p>
+          <nav class="mt-4 grid gap-2.5" aria-label="เมนู footer">
+            <a href="#projects" class="footer-link">ผลงาน / Projects</a>
+            <a href="#stack" class="footer-link">ทักษะ / Tech Stack</a>
+            <a href="#services" class="footer-link">บริการ / Services</a>
+            <a href="#contact" class="footer-link">ติดต่อ / Contact</a>
+          </nav>
+        </div>
+
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">Links</p>
+          <nav class="mt-4 grid gap-2.5" aria-label="ลิงก์ภายนอก">
+            <a href="https://fastwork.com/user/jk.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Fastwork Profile</a>
+            <a href="https://github.com/jeeradate" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Profile</a>
+            <a href="https://github.com/jeeradate/jeeradate.github.io" target="_blank" rel="noopener noreferrer" class="footer-link">Source of this site</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-line">
+      <div class="container-x flex flex-col items-start justify-between gap-2 py-5 text-[12px] text-muted sm:flex-row sm:items-center">
+        <p>© 2026 Jeeradate (jk.dev). All rights reserved.</p>
+        <p class="flex items-center gap-1.5">
+          <span>Hosted on</span>
+          <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer" class="text-heading underline decoration-line underline-offset-4 transition hover:text-accent">GitHub Pages</a>
+          <span aria-hidden="true">·</span>
+          <span>Built with Tailwind CSS</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+  <button id="toTop" type="button" class="to-top" aria-label="กลับขึ้นด้านบน" title="กลับขึ้นด้านบน">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var root = document.documentElement;
+      var header = document.getElementById('siteHeader');
+      var scrollBar = document.getElementById('scrollBar');
+      var toTop = document.getElementById('toTop');
+      var themeToggle = document.getElementById('themeToggle');
+      var themeMeta = document.querySelector('meta[name="theme-color"]');
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- Theme ---------- */
+      function applyTheme(theme, persist) {
+        root.setAttribute('data-theme', theme);
+        themeToggle.setAttribute('aria-label', theme === 'dark' ? 'สลับเป็นโหมดสว่าง' : 'สลับเป็นโหมดมืด');
+        themeToggle.setAttribute('title', theme === 'dark' ? 'สลับเป็นโหมดสว่าง' : 'สลับเป็นโหมดมืด');
+        if (themeMeta) themeMeta.setAttribute('content', theme === 'dark' ? '#060a13' : '#f7f9fc');
+        if (persist) { try { localStorage.setItem('jk-theme', theme); } catch (e) { /* ignore */ } }
+      }
+      applyTheme(root.getAttribute('data-theme') || 'dark', false);
+      themeToggle.addEventListener('click', function () {
+        applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+      });
+
+      /* ---------- Header, progress, back-to-top ---------- */
+      function onScroll() {
+        var y = window.scrollY || window.pageYOffset;
+        header.classList.toggle('scrolled', y > 8);
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        scrollBar.style.width = (max > 0 ? Math.min(100, (y / max) * 100) : 0) + '%';
+        toTop.classList.toggle('is-visible', y > 640);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+      toTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+      });
+
+      /* ---------- Mobile menu ---------- */
+      var menu = document.getElementById('mobileMenu');
+      var menuToggle = document.getElementById('menuToggle');
+      var iconOpen = document.getElementById('menuIconOpen');
+      var iconClose = document.getElementById('menuIconClose');
+
+      function setMenu(open) {
+        menu.hidden = !open;
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+        header.classList.toggle('scrolled', open || (window.scrollY || 0) > 8);
+      }
+      menuToggle.addEventListener('click', function () { setMenu(menu.hidden); });
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setMenu(false); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !menu.hidden) { setMenu(false); menuToggle.focus(); }
+      });
+      document.addEventListener('click', function (e) {
+        if (!menu.hidden && !header.contains(e.target)) setMenu(false);
+      });
+      var desktopQuery = window.matchMedia('(min-width: 1024px)');
+      if (desktopQuery.addEventListener) {
+        desktopQuery.addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+      }
+
+      /* ---------- Active nav ---------- */
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+      var sectionIds = ['projects', 'stack', 'services', 'contact'];
+      function setActive(id) {
+        navLinks.forEach(function (link) {
+          var active = link.getAttribute('href') === '#' + id;
+          link.classList.toggle('is-active', active);
+          if (active) { link.setAttribute('aria-current', 'true'); }
+          else { link.removeAttribute('aria-current'); }
+        });
+      }
+      if ('IntersectionObserver' in window) {
+        var navObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          });
+        }, { rootMargin: '-42% 0px -52% 0px', threshold: 0 });
+        sectionIds.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) navObserver.observe(el);
+        });
+      }
+
+      /* ---------- Scroll reveal ---------- */
+      var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+      if ('IntersectionObserver' in window && !prefersReduced) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+
+      /* ---------- Copy to clipboard ---------- */
+      var toast = document.getElementById('toast');
+      var toastTimer;
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('is-visible');
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(function () { toast.classList.remove('is-visible'); }, 2200);
+      }
+      function legacyCopy(text) {
+        var area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.opacity = '0';
+        document.body.appendChild(area);
+        area.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(area);
+        return ok;
+      }
+      document.querySelectorAll('[data-copy]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var value = button.getAttribute('data-copy');
+          var done = function (ok) {
+            if (ok) {
+              showToast('คัดลอกแล้ว: ' + value);
+              button.classList.add('is-copied');
+              window.setTimeout(function () { button.classList.remove('is-copied'); }, 1800);
+            } else {
+              showToast('คัดลอกอัตโนมัติไม่ได้ — กรุณาคัดลอกด้วยตนเอง');
+            }
+          };
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(value).then(function () { done(true); }, function () { done(legacyCopy(value)); });
+          } else {
+            done(legacyCopy(value));
+          }
+        });
+      });
+    }());
+  </script>
+</body>
+</html>

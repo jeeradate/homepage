@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-labelledby="fTitle fDesc">
+  <title id="fTitle">Food order and multi-role management app preview</title>
+  <desc id="fDesc">Dark restaurant ordering interface with a menu grid, an active order summary, totals, and a staff role badge.</desc>
+  <defs>
+    <linearGradient id="f-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a140f"/>
+      <stop offset="1" stop-color="#080c12"/>
+    </linearGradient>
+    <linearGradient id="f-green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#0d9488"/>
+    </linearGradient>
+    <linearGradient id="f-btn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+    <radialGradient id="f-glow">
+      <stop offset="0" stop-color="#34d399" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="f-glow2">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="f-grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#94a3b8" stroke-opacity=".05" stroke-width="1"/>
+    </pattern>
+    <filter id="f-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#000" flood-opacity=".42"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#f-bg)"/>
+  <rect width="1200" height="750" fill="url(#f-grid)"/>
+  <circle cx="1080" cy="20" r="380" fill="url(#f-glow)"/>
+  <circle cx="120" cy="740" r="340" fill="url(#f-glow2)"/>
+
+  <g font-family="Segoe UI, Inter, Arial, sans-serif">
+    <!-- Header -->
+    <g transform="translate(56 34)">
+      <rect width="34" height="34" rx="10" fill="url(#f-green)"/>
+      <text x="17" y="23" text-anchor="middle" font-family="Consolas, monospace" font-size="16" font-weight="700" fill="#04140e">fo</text>
+      <text x="50" y="15" font-size="14" font-weight="700" fill="#f8fafc" letter-spacing="1">FOODORDER</text>
+      <text x="50" y="29" font-size="9.5" fill="#94a3b8" letter-spacing="1.4">MULTI-ROLE ORDERING SYSTEM</text>
+    </g>
+    <g transform="translate(1042 34)">
+      <rect width="102" height="38" rx="10" fill="#0f1f17" stroke="#14532d"/>
+      <circle cx="20" cy="19" r="4" fill="#fbbf24"/>
+      <text x="32" y="23" font-size="10.5" fill="#fcd34d">STAFF</text>
+    </g>
+    <line x1="56" y1="94" x2="1144" y2="94" stroke="#1e293b"/>
+
+    <!-- Menu panel -->
+    <rect x="56" y="120" width="660" height="580" rx="20" fill="#0c1512" stroke="#1e293b" filter="url(#f-shadow)"/>
+    <text x="88" y="164" font-family="Consolas, monospace" font-size="11" fill="#d6d3d1" letter-spacing="1.6">MENU · TABLE 06</text>
+    <g transform="translate(88 180)">
+      <rect width="76" height="30" rx="8" fill="#0f2a1e" stroke="#166534"/>
+      <text x="38" y="19" text-anchor="middle" font-size="10" fill="#86efac">All</text>
+      <rect x="84" width="86" height="30" rx="8" fill="#111c31" stroke="#1e293b"/>
+      <text x="127" y="19" text-anchor="middle" font-size="10" fill="#94a3b8">Mains</text>
+      <rect x="178" width="86" height="30" rx="8" fill="#111c31" stroke="#1e293b"/>
+      <text x="221" y="19" text-anchor="middle" font-size="10" fill="#94a3b8">Drinks</text>
+      <rect x="272" width="92" height="30" rx="8" fill="#111c31" stroke="#1e293b"/>
+      <text x="318" y="19" text-anchor="middle" font-size="10" fill="#94a3b8">Dessert</text>
+    </g>
+
+    <!-- Food cards -->
+    <g transform="translate(88 234)">
+      <rect width="292" height="190" rx="14" fill="#111c31" stroke="#1e293b"/>
+      <circle cx="146" cy="68" r="44" fill="#2a1c10"/>
+      <circle cx="146" cy="68" r="30" fill="#f59e0b"/>
+      <circle cx="132" cy="60" r="9" fill="#fde68a"/>
+      <circle cx="158" cy="72" r="11" fill="#fbbf24"/>
+      <text x="18" y="136" font-size="13" font-weight="600" fill="#f8fafc">Basil Chicken Rice</text>
+      <text x="18" y="156" font-size="10" fill="#94a3b8">Signature · Spicy level 2</text>
+      <text x="18" y="178" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#86efac">THB 89</text>
+      <rect x="228" y="158" width="46" height="26" rx="7" fill="#0f2a1e" stroke="#166534"/>
+      <text x="251" y="175" text-anchor="middle" font-size="12" fill="#86efac">+</text>
+    </g>
+    <g transform="translate(396 234)">
+      <rect width="292" height="190" rx="14" fill="#111c31" stroke="#1e293b"/>
+      <circle cx="146" cy="68" r="44" fill="#142a1c"/>
+      <circle cx="146" cy="68" r="30" fill="#22c55e"/>
+      <circle cx="134" cy="62" r="10" fill="#86efac"/>
+      <circle cx="158" cy="66" r="8" fill="#4ade80"/>
+      <text x="18" y="136" font-size="13" font-weight="600" fill="#f8fafc">Green Curry Set</text>
+      <text x="18" y="156" font-size="10" fill="#94a3b8">Mains · Served with rice</text>
+      <text x="18" y="178" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#86efac">THB 129</text>
+      <rect x="228" y="158" width="46" height="26" rx="7" fill="#0f2a1e" stroke="#166534"/>
+      <text x="251" y="175" text-anchor="middle" font-size="12" fill="#86efac">+</text>
+    </g>
+    <g transform="translate(88 440)">
+      <rect width="292" height="190" rx="14" fill="#111c31" stroke="#1e293b"/>
+      <circle cx="146" cy="68" r="44" fill="#2a1a12"/>
+      <circle cx="146" cy="68" r="30" fill="#fb923c"/>
+      <path d="M132 58h28l-4 24h-20z" fill="#fed7aa"/>
+      <text x="18" y="136" font-size="13" font-weight="600" fill="#f8fafc">Thai Iced Tea</text>
+      <text x="18" y="156" font-size="10" fill="#94a3b8">Drinks · Less sweet</text>
+      <text x="18" y="178" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#86efac">THB 45</text>
+      <rect x="228" y="158" width="46" height="26" rx="7" fill="#0f2a1e" stroke="#166534"/>
+      <text x="251" y="175" text-anchor="middle" font-size="12" fill="#86efac">+</text>
+    </g>
+    <g transform="translate(396 440)">
+      <rect width="292" height="190" rx="14" fill="#111c31" stroke="#1e293b"/>
+      <circle cx="146" cy="68" r="44" fill="#2a2310"/>
+      <circle cx="146" cy="68" r="30" fill="#facc15"/>
+      <circle cx="146" cy="70" r="16" fill="#fef3c7"/>
+      <text x="18" y="136" font-size="13" font-weight="600" fill="#f8fafc">Mango Sticky Rice</text>
+      <text x="18" y="156" font-size="10" fill="#94a3b8">Dessert · Seasonal</text>
+      <text x="18" y="178" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#86efac">THB 79</text>
+      <rect x="228" y="158" width="46" height="26" rx="7" fill="#0f2a1e" stroke="#166534"/>
+      <text x="251" y="175" text-anchor="middle" font-size="12" fill="#86efac">+</text>
+    </g>
+
+    <!-- Order summary -->
+    <rect x="740" y="120" width="404" height="580" rx="20" fill="#0c1512" stroke="#1e293b" filter="url(#f-shadow)"/>
+    <text x="772" y="162" font-family="Consolas, monospace" font-size="11" fill="#d6d3d1" letter-spacing="1.4">ORDER #1042</text>
+    <text x="772" y="184" font-size="10.5" fill="#94a3b8">Table 06 · Dine-in · 2 guests</text>
+    <line x1="772" y1="204" x2="1112" y2="204" stroke="#1e293b"/>
+
+    <g transform="translate(772 224)">
+      <text x="0" y="16" font-size="12" fill="#e2e8f0">2 × Basil Chicken Rice</text>
+      <text x="340" y="16" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#cbd5e1">178.00</text>
+      <text x="0" y="48" font-size="12" fill="#e2e8f0">1 × Green Curry Set</text>
+      <text x="340" y="48" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#cbd5e1">129.00</text>
+      <text x="0" y="80" font-size="12" fill="#e2e8f0">2 × Thai Iced Tea</text>
+      <text x="340" y="80" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#cbd5e1">90.00</text>
+      <text x="0" y="112" font-size="12" fill="#e2e8f0">1 × Mango Sticky Rice</text>
+      <text x="340" y="112" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#cbd5e1">79.00</text>
+    </g>
+
+    <g transform="translate(772 360)">
+      <line x1="0" y1="0" x2="340" y2="0" stroke="#1e293b"/>
+      <text x="0" y="30" font-size="11" fill="#94a3b8">Subtotal</text>
+      <text x="340" y="30" text-anchor="end" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">476.00</text>
+      <text x="0" y="58" font-size="11" fill="#94a3b8">Service charge 10%</text>
+      <text x="340" y="58" text-anchor="end" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">47.60</text>
+      <text x="0" y="86" font-size="11" fill="#94a3b8">VAT 7%</text>
+      <text x="340" y="86" text-anchor="end" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">36.65</text>
+      <line x1="0" y1="106" x2="340" y2="106" stroke="#1e293b"/>
+      <text x="0" y="140" font-size="13" font-weight="600" fill="#f8fafc">Total</text>
+      <text x="340" y="140" text-anchor="end" font-family="Consolas, monospace" font-size="24" font-weight="700" fill="#86efac">560.25</text>
+      <text x="340" y="160" text-anchor="end" font-size="9.5" fill="#64748b">THB</text>
+    </g>
+
+    <g transform="translate(772 548)">
+      <rect width="340" height="46" rx="11" fill="url(#f-btn)"/>
+      <text x="170" y="28" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff">Confirm order  →</text>
+      <rect y="58" width="164" height="38" rx="9" fill="#0f172a" stroke="#1e293b"/>
+      <text x="82" y="81" text-anchor="middle" font-size="10.5" fill="#94a3b8">Save as draft</text>
+      <rect x="176" y="58" width="164" height="38" rx="9" fill="#0f172a" stroke="#1e293b"/>
+      <text x="258" y="81" text-anchor="middle" font-size="10.5" fill="#94a3b8">Print receipt</text>
+    </g>
+
+    <!-- Role strip -->
+    <g transform="translate(88 660)">
+      <text x="0" y="12" font-family="Consolas, monospace" font-size="9" fill="#64748b" letter-spacing="1.2">ACCESS ROLES</text>
+      <rect x="104" y="-6" width="78" height="24" rx="6" fill="#0f2a1e" stroke="#166534"/>
+      <text x="143" y="10" text-anchor="middle" font-size="9.5" fill="#86efac">Manager</text>
+      <rect x="190" y="-6" width="58" height="24" rx="6" fill="#2a2310" stroke="#854d0e"/>
+      <text x="219" y="10" text-anchor="middle" font-size="9.5" fill="#fcd34d">Staff</text>
+      <rect x="256" y="-6" width="66" height="24" rx="6" fill="#111c31" stroke="#1e293b"/>
+      <text x="289" y="10" text-anchor="middle" font-size="9.5" fill="#94a3b8">Kitchen</text>
+    </g>
+    <g transform="translate(772 676)">
+      <circle cx="5" cy="5" r="4" fill="#34d399"/>
+      <text x="18" y="9" font-size="9.5" fill="#64748b">Database synced · SQLModel</text>
+    </g>
+  </g>
+</svg>
