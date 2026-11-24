@@ -163,7 +163,9 @@ Change `--accent` / `--accent-2` to re-brand buttons, links, gradients, and high
 
 ## Deploying to GitHub Pages
 
-This repo is expected to be the user site repository **`jeeradate.github.io`**, so it publishes at the domain root.
+This repo publishes as the user site repository **`jeeradate.github.io`**, so it serves from the domain root.
+
+**Current status:** live at https://jeeradate.github.io/ (branch `main`, folder `/`, source *Deploy from a branch*).
 
 ### First deployment
 
@@ -187,6 +189,8 @@ Then:
 4. Click **Save**.
 5. Wait 1–2 minutes, then visit **https://jeeradate.github.io/**.
 
+> The repository name must be exactly `jeeradate.github.io` for the site to appear at the domain root. A repo named `homepage` publishes at `jeeradate.github.io/homepage/` instead.
+
 No GitHub Actions, Jekyll, or build step is needed. You can add an empty `.nojekyll` file if you later introduce folders starting with an underscore, though it is not required for this layout.
 
 ### Updating the live site
@@ -202,6 +206,11 @@ GitHub Pages redeploys automatically on every push to `main`. If you do not see 
 - Hard refresh (**Ctrl + F5**) to bypass browser cache.
 - Check **Actions** / **Pages** in the repository for deployment status.
 - Confirm `index.html` is at the repository root.
+
+Remotes:
+
+- `origin` → `jeeradate/jeeradate.github.io` (this is the live site).
+- `homepage` → `jeeradate/homepage` (optional mirror; pushing here does **not** update the live site).
 
 ### Using a custom domain
 
@@ -221,7 +230,7 @@ GitHub Pages redeploys automatically on every push to `main`. If you do not see 
 - Responsive layout designed for 360 px, 768 px, and 1280 px+.
 - Theme toggle, mobile menu, active nav, scroll reveal, copy buttons, and reduced-motion fallback are all vanilla JS with no dependencies.
 
-> Note: `https://jeeradate.github.io/` returns 404 until the repository is published via **Settings → Pages** for the first time.
+> Note: the site is published and returns HTTP 200 as of 24 Nov 2026. If it ever shows 404 again, confirm **Settings → Pages** still points at branch `main` / `(root)` and that the latest build finished.
 
 ---
 
